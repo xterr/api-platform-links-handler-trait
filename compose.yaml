@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+###> doctrine/doctrine-bundle ###
+  database:
+    image: mysql:latest
+    container_name: apiplatform_db
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: apiplatform
+      MYSQL_DATABASE: apiplatform
+      MYSQL_USER: apiplatform
+      MYSQL_PASSWORD: apiplatform
+    ports:
+      - 3306:3306
+    volumes:
+      - database_data:/var/lib/mysql
+    networks:
+      - apiplatform_net
+###< doctrine/doctrine-bundle ###
+
+volumes:
+###> doctrine/doctrine-bundle ###
+  database_data:
+###< doctrine/doctrine-bundle ###
+
+networks:
+  apiplatform_net:
+    driver: bridge
